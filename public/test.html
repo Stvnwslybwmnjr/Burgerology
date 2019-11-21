@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <title>testing</title>
+</head>
+<body>
+    <input type="text" class="burger">
+    <h1 class="submit">make a burger</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6" id="newBurger"></div>
+            <div class="col-6" id="devoured"></div>
+        </div>
+    </div>
+
+    <script>
+    $(".submit").on("click", function(){
+       let newBurger={burgerName: $('.burger').val()}
+        $.post("/api/burger",newBurger, (res)=>console.log(res) )
+    })
+    $.get
+    $("#newBurger").append()
+    
+    </script>
+</body>
+</html>
