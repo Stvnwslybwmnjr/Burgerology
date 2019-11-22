@@ -43,3 +43,13 @@
     </div>
   </div>
 </div>
+
+ <script>
+    $(".addBurgerButton").on("click", function(){
+       let newBurger={burgerName: $('#name').val()}
+        $.post("/api/burger",newBurger, (res)=>console.log(res) )
+    })
+    $.get
+    $("#newBurger").append()
+    
+    </script>
