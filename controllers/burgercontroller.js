@@ -36,10 +36,10 @@ router.put("/api/burger/:id", function(req, res) {
 })
 router.put('/api/burgers/:id', function(req, res) {
   var condition = 'id = ' + req.params.id;
-
+console.log("ENGANGED B CONTROL")
   burger.updateOne({
     devoured: true
-  }, condition, function(data) {
+  }, condition, function(result) {
     res.redirect('/');
   });
 });

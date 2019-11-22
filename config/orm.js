@@ -45,6 +45,7 @@ var orm = {
   //   });
   // }
   updateOne: function(table, objColVals, condition, cb) {
+    console.log("orm hit")
 		// Construct the query string that updates a single entry in the target table
 		var queryString = "UPDATE " + table;
 

@@ -7,8 +7,8 @@
         {{#each burgers}}
         {{#unless this.devoured}}
         <div>
-          <form action="/api/burgers/{{this.id}}?_method=PUT" method="POST">
-            <button type="submit" class='notEaten'> {{this.burger_name}}</button>
+          <form >
+            <button type="submit" class='notEaten' data="{{this.id}}"> {{this.burger_name}}</button>
           </form>
         </div>
         {{/unless}}
@@ -53,10 +53,14 @@
     $.get
     $("#newBurger").append()
 
-    </script>
-     
-      {{!-- event.preventDefault(); --}}
-    {{!-- $(".notEaten").on("click", function() {
-      $.put("/api/burger/:id", '', (res)=>console.log(res) )
+   $(".notEaten").on("click", function() {
+     console.log(this)
+     console.log(this.data)
+     console.log($(this))
+      event.preventDefault();
+      $.post("/api/burger/:id", "", (res)=>console.log(res) )
     })
-     --}}
+    </script>
+     {{!-- All I need to do really is get the data-id from my uneaten burger buttons so i can send it to my update functions, but I can't seem to get it working --}}
+
+    
