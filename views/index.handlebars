@@ -46,6 +46,7 @@
 
  <script>
     $(".addBurgerButton").on("click", function(){
+      event.preventDefault();
        let newBurger={burgerName: $('#name').val()}
         $.post("/api/burger",newBurger, (res)=>console.log(res) )
     })
