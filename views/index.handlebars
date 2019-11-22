@@ -7,8 +7,8 @@
         {{#each burgers}}
         {{#unless this.devoured}}
         <div>
-          <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-            <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
+          <form action="/api/burgers/{{this.id}}?_method=PUT" method="POST">
+            <button type="submit" class='notEaten'> {{this.burger_name}}</button>
           </form>
         </div>
         {{/unless}}
@@ -52,5 +52,11 @@
     })
     $.get
     $("#newBurger").append()
-    
+
     </script>
+     
+      {{!-- event.preventDefault(); --}}
+    {{!-- $(".notEaten").on("click", function() {
+      $.put("/api/burger/:id", '', (res)=>console.log(res) )
+    })
+     --}}

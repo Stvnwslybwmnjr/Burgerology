@@ -1,5 +1,16 @@
 var connection = require("./connection.js");
 console.log("check check connection")
+
+function objToSql(ob) {
+	var arr = [];
+
+	for (var key in ob) {
+		arr.push(key + "=" + ob[key]);
+	}
+
+	return arr.toString();
+}
+
 var orm = {
   selectAll: function(tableName, cb) {
     console.log(tableName)
@@ -24,15 +35,36 @@ var orm = {
       cb(res);
     });
   },
-  updateOne: function(table, burgerName, id, cb) {
-    var sqlQuery = `UPDATE ${table} SET burger_name = ${burgerName} WHERE id = ${id};`;
-    connection.query(sqlQuery, function(err, res) {
-      if (err) {
-        throw err;
-      }
-      cb(res);
-    });
-  }
+  // updateOne: function(id, cb) {
+  //   var sqlQuery = `UPDATE burgers SET devoured = true WHERE id = 1;`;
+  //   connection.query(sqlQuery, function(err, res) {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //     cb(res);
+  //   });
+  // }
+  updateOne: function(table, objColVals, condition, cb) {
+		// Construct the query string that updates a single entry in the target table
+		var queryString = "UPDATE " + table;
+
+		queryString += " SET ";
+		queryString += objToSql(objColVals);
+		queryString += " WHERE ";
+		queryString += condition;
+
+		// console.log(queryString);
+
+		// Perform the database query
+		connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			cb(result);
+		});
+	}
 };
 
 module.exports = orm;
