@@ -23,24 +23,29 @@ router.post("/api/burger", function(req, res) {
     });
   });
 
-router.put("/api/burger/:id", function(req, res) {
-  console.log(req.params.id)
-  Burger.update(req.params.id, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-  })
-})
+// router.put("/api/burger/:id", function(req, res) {
+//   console.log(req.params.id)
+// })
 router.put('/api/burgers/:id', function(req, res) {
+      // Burger.update(req.params.id, function(result) {
+      //   if (result.changedRows == 0) {
+      //     // If no rows were changed, then the ID must not exist, so 404
+      //     return res.status(404).end();
+      //   } else {
+      //     res.status(200).end();
+      //   }
+      // })
   var condition = 'id = ' + req.params.id;
 console.log("ENGANGED B CONTROL")
-  burger.updateOne({
-    devoured: true
-  }, condition, function(result) {
-    res.redirect('/');
+
+console.log(req.params.id)
+console.log(req.body.devoured)
+  Burger.updateOne({ devoured: true }, condition, function(result) {
+    if (result.changedRows === 0) {
+      return res.status(404).end();
+    }else {
+      res.status(200).end();
+    }
   });
 });
 

@@ -7,15 +7,13 @@
         {{#each burgers}}
         {{#unless this.devoured}}
         <div>
-          <form >
-            <button type="submit" class='notEaten' data="{{this.id}}"> {{this.burger_name}}</button>
-          </form>
+         
+            <div class='notEaten' data="{{this.id}}"> {{this.burger_name}}</div>
         </div>
         {{/unless}}
         {{/each}}
       </div>
 
-    </div>
       <div class="col-6">
         {{#each burgers}}
         {{#if this.devoured}}
@@ -27,6 +25,7 @@
         {{/if}}
         {{/each}}
       </div>
+    </div>
   </div>
 </main>
 
@@ -45,22 +44,32 @@
 </div>
 
  <script>
-    $(".addBurgerButton").on("click", function(){
+    $(".addBurgerButton").on("click", function(event){
       event.preventDefault();
        let newBurger={burgerName: $('#name').val()}
-        $.post("/api/burger",newBurger, (res)=>console.log(res) )
+        $.post("/api/burger",newBurger, (res)=>{
+          console.log(res)
+          res.id?window.location="/":console.log("post errer")
+          //let carded= age>20?true:false //ternary conditions or ternary statements (from es6/ecma2015)
+          } )
     })
-    $.get
-    $("#newBurger").append()
+    //$.get
+    //$("#newBurger").append()
 
-   $(".notEaten").on("click", function() {
-     console.log(this)
-     console.log(this.data)
-     console.log($(this))
+   $(".notEaten").on("click", function(event) {
       event.preventDefault();
-      $.post("/api/burger/:id", "", (res)=>console.log(res) )
+     console.log(this)
+   
+     console.log($(this))
+    
+    $.ajax({
+   url: `api/burgers/${$(this).attr('data')}`,
+   type: 'PUT',
+   success: function(response) {
+    console.log("200",response);
+    window.location="/"
+   }
+});
     })
     </script>
-     {{!-- All I need to do really is get the data-id from my uneaten burger buttons so i can send it to my update functions, but I can't seem to get it working --}}
-
     
